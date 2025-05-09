@@ -22,9 +22,7 @@
 			"id": "22d6a41c61194f44a7981424aaadce13"
 		}
 	],
-	"vars": {
-		"YOUTUBE_API_KEY": "1234567890"
-	}
+
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
