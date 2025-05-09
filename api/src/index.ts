@@ -1,4 +1,3 @@
-
 export default {
 	async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
 		switch (controller.cron) {
@@ -8,7 +7,13 @@ export default {
 						`https://youtube.googleapis.com/youtube/v3/playlistItems?part=id&part=contentDetails&maxResults=1000&playlistId=UUbRP3c757lWg9M-U7TyEkXA&key=${env.YOUTUBE_API_KEY}`
 					);
 					const data = await response.json();
-					console.log(data);
+					const processedVideos = (data as { items: Array<{ contentDetails: { videoId: string; videoPublishedAt: string } }> }).items.map(
+						(item) => ({
+							videoId: item.contentDetails.videoId,
+							publishedAt: item.contentDetails.videoPublishedAt,
+						})
+					);
+					console.log(JSON.stringify(processedVideos));
 				} catch (error) {
 					console.error('Error fetching YouTube API:', error);
 				}
